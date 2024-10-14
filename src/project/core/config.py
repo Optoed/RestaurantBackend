@@ -9,7 +9,7 @@ class Settings(BaseSettings):
     ENV: str = "DEV"
     LOG_LEVEL: str = "DEBUG"
 
-    POSTGRES_SCHEMA: str = "my_app_schema"
+    POSTGRES_SCHEMA: str = "public"
     POSTGRES_HOST: str = "localhost"
     POSTGRES_DB: str = "postgres"
     POSTGRES_PORT: int = 5432
