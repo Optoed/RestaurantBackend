@@ -22,11 +22,11 @@ class UserRepository:
 
         return True if result else False
 
-    async def get_all_users(
+    async def get_all_products(
         self,
         session: AsyncSession,
     ) -> list[UserSchema]:
-        query = f"select * from {settings.POSTGRES_SCHEMA}.users;"
+        query = f"select * from {settings.POSTGRES_SCHEMA}.product;"
 
         users = await session.execute(text(query))
 

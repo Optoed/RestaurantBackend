@@ -11,7 +11,7 @@ class Settings(BaseSettings):
 
     POSTGRES_SCHEMA: str = "public"
     POSTGRES_HOST: str = "localhost"
-    POSTGRES_DB: str = "postgres"
+    POSTGRES_DB: str = "restaurant"
     POSTGRES_PORT: int = 5432
     POSTGRES_USER: SecretStr = "postgres"
     POSTGRES_PASSWORD: SecretStr = "postgres"
