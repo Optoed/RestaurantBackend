@@ -21,3 +21,18 @@ FastApi app with Docker + PostgreSQL study example
 
 Swagger:
 - после успешного запуска приложения, по адресу http://localhost:8000/docs будет доступен swagger
+
+P.S перезапуск готового проекта:
+
+  Поднимаем заново контейнер
+  ```bash
+  docker-compose up --build
+  ```
+  Выбираем свободный порт:
+  ```bash
+  poetry run uvicorn src.main:app --host 0.0.0.0 --port 8007
+  ```
+
+
+  
+

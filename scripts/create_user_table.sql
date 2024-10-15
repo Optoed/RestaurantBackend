@@ -1,12 +1,10 @@
-CREATE TABLE users (
+CREATE TABLE product (
     id serial4,
-    first_name varchar,
-    last_name varchar,
-    email varchar unique,
-    password varchar,
-    phone_number varchar null
+    name varchar,
+    cost int,
 );
 
-INSERT INTO users VALUES
-(default, 'ivan', 'ivanov', 'mail@mail.ru', 'qwerty', '+78005553535'),
-(default, 'petr', 'petrov', 'anymail@mail.ru', '123', '+71234567890');
+INSERT INTO product VALUES
+(default, 'Морковь', 30),
+(default, 'Капуста', 20),
+(default, 'Картофель', 40);
