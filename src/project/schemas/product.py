@@ -1,7 +1,7 @@
 from pydantic import BaseModel, ConfigDict
 
 
-class UserSchema(BaseModel):
+class ProductSchema(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
     id: int

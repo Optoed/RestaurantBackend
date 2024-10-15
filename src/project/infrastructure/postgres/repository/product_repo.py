@@ -3,14 +3,14 @@ from typing import Type
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import text
 
-from project.schemas.user import UserSchema
-from project.infrastructure.postgres.models import User
+from project.schemas.product import ProductSchema
+from project.infrastructure.postgres.models import Product
 
 from project.core.config import settings
 
 
 class UserRepository:
-    _collection: Type[User] = User
+    _collection: Type[Product] = Product
 
     async def check_connection(
         self,
@@ -25,10 +25,10 @@ class UserRepository:
     async def get_all_products(
         self,
         session: AsyncSession,
-    ) -> list[UserSchema]:
+    ) -> list[ProductSchema]:
         query = f"select * from {settings.POSTGRES_SCHEMA}.product;"
 
-        users = await session.execute(text(query))
+        products = await session.execute(text(query))
 
-        return [UserSchema.model_validate(obj=user) for user in users.mappings().all()]
+        return [ProductSchema.model_validate(obj=product) for product in products.mappings().all()]
 

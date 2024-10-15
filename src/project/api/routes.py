@@ -1,15 +1,15 @@
 from fastapi import APIRouter
 
-from project.infrastructure.postgres.repository.user_repo import UserRepository
+from project.infrastructure.postgres.repository.product_repo import UserRepository
 from project.infrastructure.postgres.database import PostgresDatabase
-from project.schemas.user import UserSchema
+from project.schemas.product import ProductSchema
 
 
 router = APIRouter()
 
 
-@router.get("/all_products", response_model=list[UserSchema])
-async def get_all_products() -> list[UserSchema]:
+@router.get("/all_products", response_model=list[ProductSchema])
+async def get_all_products() -> list[ProductSchema]:
     user_repo = UserRepository()
     database = PostgresDatabase()
 
