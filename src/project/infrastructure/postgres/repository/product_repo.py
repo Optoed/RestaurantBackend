@@ -1,3 +1,4 @@
+import string
 from typing import Type
 
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -30,5 +31,40 @@ class UserRepository:
 
         products = await session.execute(text(query))
 
-        return [ProductSchema.model_validate(obj=product) for product in products.mappings().all()]
+        return [ProductSchema.model_validate(dict(product)) for product in products.mappings().all()]
+
+    async def get_product_by_ID(
+            self,
+            session: AsyncSession,
+            ID: int
+    ) -> ProductSchema:
+        query = text(f"select * from {settings.POSTGRES_SCHEMA}.product where id = :id")
+
+        result = await session.execute(query, {"id": ID})
+
+        product_row = result.fetchone()
+
+        if product_row:
+            return ProductSchema.model_validate(dict(product_row))
+        return None
+
+    async def insert_product(
+            self,
+            session: AsyncSession,
+            name: string,
+            cost: int
+    ) -> ProductSchema:
+        query = text(f"""
+               INSERT INTO {settings.POSTGRES_SCHEMA}.product (name, cost) 
+               VALUES (:name, :cost)
+               RETURNING id, name, cost
+           """)
+        result = await session.execute(query, {"name" : name, "cost" : cost})
+
+        product_row = result.fetchone()
+
+        if product_row:
+            return ProductSchema.model_validate(dict(product_row))
+        return None
+
 
